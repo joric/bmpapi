@@ -2,6 +2,8 @@
 
 cd %~dp0
 
+rd /S /Q .\_build
+
 set file=_build/nrf52840_xxaa.hex
 
 bash -c "export NRFSDK15_ROOT=/mnt/c/SDK/nRF5_SDK_15.0.0_a53641a && make" || exit
