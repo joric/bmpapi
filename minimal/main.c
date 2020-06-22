@@ -6,8 +6,6 @@ void bootloader_jump(void) {
   for (int i=0; i<4; i++) { nrf_gpio_pin_write(LED_PIN, i%2==0); nrf_delay_ms(250); }
 }
 
-void reset(uint32_t _) { }
-
 __attribute__((section(".api_table")))
 bmp_api_t API_TABLE = {
     .api_version = 0x01020304,
