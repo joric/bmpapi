@@ -2,9 +2,6 @@
 #include "nrf_delay.h"
 #include "nrf.h"
 
-#define GPIO(port, pin) ((port << 6) | pin)
-#define LED_PIN GPIO(1,10)
-
 bmp_error_t bmp_err;
 
 const char* get_bootloader_info(void) { return "bmpapi"; }
