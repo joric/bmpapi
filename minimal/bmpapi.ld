@@ -5,17 +5,16 @@ GROUP(-lgcc -lc -lnosys)
 
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x26000, LENGTH = 0xba000
+  FLASH (rx) : ORIGIN = 0xE0000, LENGTH = 0x1E000
   RAM (rwx) :  ORIGIN = 0x20018000, LENGTH = 0x28000
-  BMPAPI (rx) : ORIGIN = 0xFDE00, LENGTH = 0x4000
 }
 
 SECTIONS
 {
-    .api_table 0xFDE00:
-    {
-    KEEP(*(.api_table))
-    } > BMPAPI
+  .api_table 0xFDE00:
+  {
+  KEEP(*(.api_table))
+  } > FLASH
 }
 
 SECTIONS
