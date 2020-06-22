@@ -387,4 +387,4 @@ typedef struct {
     bmp_api_adc_t        adc;
 } bmp_api_t;
 
-#define BMPAPI ((bmp_api_t*)0xFDE00)
+#define BMPAPI ((bmp_api_t*)0x30000)

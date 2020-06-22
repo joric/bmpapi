@@ -11,7 +11,7 @@ MEMORY
 
 SECTIONS
 {
-  .api_table 0xFDE00:
+  .api_table 0x30000:
   {
   KEEP(*(.api_table))
   } > FLASH

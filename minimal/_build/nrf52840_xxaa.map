@@ -249,7 +249,7 @@ Discarded input sections
  .text.get_bootloader_info
                 0x0000000000000000        0x8 _build/nrf52840_xxaa/main.c.o
  .text.bmpapi_init
-                0x0000000000000000      0x2d0 _build/nrf52840_xxaa/main.c.o
+                0x0000000000000000      0x2cc _build/nrf52840_xxaa/main.c.o
  .rodata.get_bootloader_info.str1.4
                 0x0000000000000000        0x7 _build/nrf52840_xxaa/main.c.o
  COMMON         0x0000000000000000        0x1 _build/nrf52840_xxaa/main.c.o
@@ -1424,11 +1424,11 @@ END GROUP
 .igot.plt       0x0000000020018074        0x0 load address 0x0000000000026930
  .igot.plt      0x0000000020018074        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.api_table      0x00000000000fde00      0x13c
+.api_table      0x0000000000030000      0x13c
  *(.api_table)
- .api_table     0x00000000000fde00      0x13c _build/nrf52840_xxaa/main.c.o
-                0x00000000000fde00                API_TABLE
-                0x00000000000fdf3c                . = ALIGN (0x4)
+ .api_table     0x0000000000030000      0x13c _build/nrf52840_xxaa/main.c.o
+                0x0000000000030000                API_TABLE
+                0x000000000003013c                . = ALIGN (0x4)
 
 .mem_section_dummy_ram
 
@@ -1535,20 +1535,20 @@ OUTPUT(_build/nrf52840_xxaa.out elf32-littlearm)
  .comment       0x0000000000000031       0x32 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(_exit.o)
  .comment       0x0000000000000031       0x32 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o
 
-.debug_line     0x0000000000000000     0x1978
+.debug_line     0x0000000000000000     0x1975
  .debug_line    0x0000000000000000       0x84 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
  .debug_line    0x0000000000000084       0x9a _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
- .debug_line    0x000000000000011e      0xaef _build/nrf52840_xxaa/main.c.o
- .debug_line    0x0000000000000c0d      0x339 _build/nrf52840_xxaa/system_nrf52840.c.o
- .debug_line    0x0000000000000f46      0x157 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-atexit.o)
- .debug_line    0x000000000000109d      0x15b /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-exit.o)
- .debug_line    0x00000000000011f8       0xa5 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-fini.o)
- .debug_line    0x000000000000129d       0xef /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
- .debug_line    0x000000000000138c       0xbe /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
- .debug_line    0x000000000000144a      0x17c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
- .debug_line    0x00000000000015c6      0x192 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-__atexit.o)
- .debug_line    0x0000000000001758      0x1bf /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-__call_atexit.o)
- .debug_line    0x0000000000001917       0x61 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(_exit.o)
+ .debug_line    0x000000000000011e      0xaec _build/nrf52840_xxaa/main.c.o
+ .debug_line    0x0000000000000c0a      0x339 _build/nrf52840_xxaa/system_nrf52840.c.o
+ .debug_line    0x0000000000000f43      0x157 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-atexit.o)
+ .debug_line    0x000000000000109a      0x15b /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-exit.o)
+ .debug_line    0x00000000000011f5       0xa5 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-fini.o)
+ .debug_line    0x000000000000129a       0xef /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
+ .debug_line    0x0000000000001389       0xbe /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
+ .debug_line    0x0000000000001447      0x17c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_line    0x00000000000015c3      0x192 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-__atexit.o)
+ .debug_line    0x0000000000001755      0x1bf /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_line    0x0000000000001914       0x61 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(_exit.o)
 
 .debug_info     0x0000000000000000     0x7c13
  .debug_info    0x0000000000000000       0xb7 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
