@@ -19,6 +19,7 @@ bmp_api_t API_TABLE = {
 
 int main(void) {
   //bootloader_jump();
-  BMPAPI->bootloader_jump(); // crash
+  //BMPAPI->bootloader_jump = bootloader_jump;
+  BMPAPI->bootloader_jump();
 }
 
