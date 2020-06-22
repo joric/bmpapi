@@ -387,4 +387,8 @@ typedef struct {
     bmp_api_adc_t        adc;
 } bmp_api_t;
 
+//#define BMPAPI ((bmp_api_t*)0xFDE00)
 #define BMPAPI ((bmp_api_t*)0x30000)
+
+// adafruit bootloader refuses to run API at 0xFDE00, needs a lower address
+
