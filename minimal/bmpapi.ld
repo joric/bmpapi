@@ -7,18 +7,15 @@ MEMORY
 {
   FLASH (rx) : ORIGIN = 0x26000, LENGTH = 0xba000
   RAM (rwx) :  ORIGIN = 0x20018000, LENGTH = 0x28000
-  MY_MEMORY (rx) : ORIGIN = 0xFDE00, LENGTH = 8k
+  BMPAPI (rx) : ORIGIN = 0xFDE00, LENGTH = 0x4000
 }
 
 SECTIONS
 {
-  .mysection :
-  {
-    . = ALIGN(4);
-    __mysection_start__ = .;
-	*(.mysection*)
-    __mysection_end__ = .;
-  } > MY_MEMORY
+    .api_table 0xFDE00:
+    {
+    KEEP(*(.api_table))
+    } > BMPAPI
 }
 
 SECTIONS
@@ -123,9 +120,3 @@ SECTIONS
 } INSERT AFTER .text
 
 INCLUDE "nrf_common.ld"
-
-/* Check if FLASH usage exceeds FLASH size */
-ASSERT( LENGTH(FLASH) >= (__etext + SIZEOF(.data)), "FLASH memory overflowed !")
-  
-/* Check if MY_MEMORY usage exceeds MY_MEMORY size */
-ASSERT( LENGTH(MY_MEMORY) >= (__mysection_end__ - __mysection_start__), "MY_MEMORY memory overflowed !")
