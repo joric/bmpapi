@@ -5,19 +5,8 @@ GROUP(-lgcc -lc -lnosys)
 
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x26000, LENGTH = 0xD2000
-
-/*  FLASH (rx) : ORIGIN = 0x26000+0xba000, LENGTH = 0xba000*/
-
+  FLASH (rx) : ORIGIN = 0x26000, LENGTH = 0x4000
   RAM (rwx) :  ORIGIN = 0x20018000, LENGTH = 0x28000
-}
-
-SECTIONS
-{
-  .api_table 0xA0000:
-  {
-  KEEP(*(.api_table))
-  } > FLASH
 }
 
 SECTIONS

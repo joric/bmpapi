@@ -4,10 +4,11 @@
 
 bmp_error_t bmp_err;
 
+void bootloader_jump(void);
 const char* get_bootloader_info(void) { return "bmpapi"; }
 
 // logger
-void logger_init(void) {}
+void logger_init(void);
 void logger_info(const char* str) { }
 
 // app
@@ -109,10 +110,120 @@ bmp_error_t webc_set_rcv_callback(bmp_error_t (*callback)(const uint8_t* dat, ui
 bmp_error_t webc_set_send_buffer(uint8_t* buf, uint16_t len) { return bmp_err; }
 bmp_error_t webc_set_disconnect_callback(bmp_error_t (*callback)(void)) { return bmp_err; }
 
+__attribute__((section(".api_table")))
+bmp_api_t API_TABLE = {
+  9,
+  bootloader_jump,
+  get_bootloader_info,
+  {
+    app_init,
+    app_reset,
+    enter_sleep_mode,
+    main_task_start,
+    process_task,
+    push_keystate_change,
+    pop_keystate_change,
+    bmp_keymap_key_to_keycode,
+    set_keycode_to_keymap,
+    set_keymap,
+    set_layout_code,
+    set_config,
+    get_keymap_info,
+    get_config,
+    save_file,
+    delete_file,
+    get_file,
+    get_vcc_mv,
+    get_vcc_percent,
+    set_state_change_cb
+  },
+  {
+    usb_init,
+    usb_enable,
+    usb_process,
+    usb_send_key,
+    usb_send_mouse,
+    usb_send_system,
+    usb_send_consumer,
+    usb_serial_putc,
+    usb_serial_getc,
+    usb_serial_puts,
+    usb_serial_byte_to_read,
+    usb_set_raw_receive_cb,
+    usb_raw_send,
+    usb_create_file,
+    usb_set_msc_write_cb
+  },
+  {
+    ble_init,
+    ble_advertise,
+    ble_scan,
+    ble_get_bonding_info,
+    ble_delete_bond,
+    ble_send_key,
+    ble_send_mouse,
+    ble_send_system,
+    ble_send_consumer,
+    bmpapi_ble_nus_send_bytes,
+    ble_set_nus_rcv_cb,
+    ble_set_nus_disconnect_cb
+  },
+  {
+    gpio_set_mode,
+    gpio_read_pin,
+    gpio_set_pin,
+    gpio_clear_pin
+  },
+  {
+    i2cm_init,
+    i2cm_uninit,
+    i2cm_transmit,
+    i2cm_receive,
+    i2cm_write_reg,
+    i2cm_read_reg
+  },
+  {
+    bmp_i2cs_init,
+    i2cs_uninit,
+    i2cs_prepare,
+    i2cs_receive
+  },
+  {
+    spim_init,
+    spim_cs_init,
+    spim_start
+  },
+  {
+    setleds_pin
+  },
+  {
+    logger_init,
+    logger_info
+  },
+  {
+    webc_enter,
+    webc_set_rcv_callback,
+    webc_set_send_buffer,
+    webc_set_disconnect_callback
+  },
+  {
+    encoder_init,
+    encoder_get_count
+  },
+  {
+    adc_config_vcc_channel,
+    adc_config_channel,
+    adc_sample_and_convert
+  }
+};
+
+
+#if 0
 void bmpapi_init() {
 
   BMPAPI->api_version = API_VERSION;
-//  BMPAPI->bootloader_jump = bootloader_jump;
+  BMPAPI->bootloader_jump = bootloader_jump;
+  BMPAPI->get_bootloader_info = get_bootloader_info;
 
   // app
   BMPAPI->app.init = app_init;
@@ -205,3 +316,5 @@ void bmpapi_init() {
   BMPAPI->adc.config_channel     = adc_config_channel;
   BMPAPI->adc.sample_and_convert = adc_sample_and_convert;
 }
+#endif
+
