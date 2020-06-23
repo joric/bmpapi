@@ -15,14 +15,6 @@ void logger_init(void) {
 }
 
 int main(void) {
-
-  // set LDO to 3.3V (nRFMicro 1.2)
-  if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3) {
-    NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
-    NRF_UICR->REGOUT0 = UICR_REGOUT0_VOUT_3V3;
-    NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
-  }
-
   BMPAPI->bootloader_jump();
 }
 
