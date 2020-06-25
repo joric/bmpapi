@@ -22,12 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "nrfx_power.h"
 
 #define RGBLED_NUM 6 // nb! get them from bmp_conf
-
-#include "custom_board.h"
-
-#ifndef RGB_DI_PIN
-#include "pin_assign.h"
-#endif
+#define RGB_DI_PIN PIN1 // same
 
 #define PWM_PERIOD ((int) (1.25f / 0.0625f))
 #define PWM_0H_DURATION ((int) (0.4f / 0.0625f))
@@ -122,3 +117,4 @@ void ws2812_setleds_rgbw(LED_TYPE *ledarray, uint16_t number_of_leds) {
   *p_dat++ = 0x8000;
   nrfx_pwm_simple_playback(&pwm0, &pwm_seq, 1, NRFX_PWM_FLAG_STOP);
 }
+

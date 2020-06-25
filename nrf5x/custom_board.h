@@ -91,10 +91,6 @@ extern "C" {
 #define CONFIG_PIN_SDA PIN5
 #define CONFIG_PIN_SCL PIN6
 
-#ifndef RGB_DI_PIN
-#define RGB_DI_PIN PIN1
-#endif
-
 //#define NRF_LOG_ENABLED 0
 //#define NRF_LOG_BACKEND_SERIAL_USES_UART 0
 //#define NRF_LOG_BACKEND_SERIAL_UART_TX_PIN 5
@@ -113,6 +109,7 @@ extern "C" {
                                  .rc_temp_ctiv  = 2,                                \
                                  .xtal_accuracy = 0}
 
+//#pragma message "hello from custom_board.h"
 #endif
 
 

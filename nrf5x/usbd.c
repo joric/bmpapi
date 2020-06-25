@@ -516,7 +516,7 @@ char cdc_acm_getc() {
  * Configure if example supports USB port connection
  */
 #ifndef USBD_POWER_DETECTION
-#define USBD_POWER_DETECTION true
+#define USBD_POWER_DETECTION false
 #endif
 
 /**
@@ -614,7 +614,7 @@ static void usbd_user_ev_handler(app_usbd_event_type_t event)
             //NRF_LOG_DEBUG("USB disable");
             break;
         case APP_USBD_EVT_POWER_DETECTED:
-            NRF_LOG_DEBUG("USB power detected");
+            //NRF_LOG_DEBUG("USB power detected");
             if (!nrf_drv_usbd_is_enabled())
             {
                 app_usbd_enable();
@@ -650,7 +650,7 @@ int usbd_init(void) {
   //NRF_LOG_DEBUG("Hello USB!\r\n");
 
 // todo joric
-#if 1
+#if 0
   app_usbd_class_inst_t const * class_inst_kbd;
   class_inst_kbd = app_usbd_hid_kbd_class_inst_get(&m_app_hid_kbd);
   ret = app_usbd_class_append(class_inst_kbd);
@@ -680,31 +680,24 @@ int usbd_init(void) {
   ret = app_usbd_class_append(class_cdc_acm);
   APP_ERROR_CHECK(ret);
 
-//  cli_init();
-
   return 0;
 }
 
 int usbd_enable(void) {
 
-  // crashes here apparently
-
-  uint32_t  ret = app_usbd_power_events_enable();
+  uint32_t  ret = app_usbd_power_events_enable(); // crashes here in separate BMPAPI / launcher configuration
 
   APP_ERROR_CHECK(ret);
-
-  blink(1,500); 
 
   return ret;
 }
 
 void usbd_process(void) {
+  blink(1,25); // gets called allright (doesn't get called after hang)
+
   while (app_usbd_event_queue_process()) {
     continue;/* Nothing to do */
   }
-  //blink(1,50); // gets called allright
-
-  //cli_exec();
 }
 
 int usbd_send_kbd_report(app_usbd_hid_kbd_t const *  p_kbd, report_keyboard_t *report);

@@ -388,3 +388,5 @@ typedef struct {
 } bmp_api_t;
 
 #define BMPAPI ((bmp_api_t*)0xA0000)
+
+void blink(int times, int delay);

@@ -16,13 +16,10 @@ void logger_init(void); // called in ble_common.c !
 void logger_info(const char* str) {};
 
 // app
-int32_t app_init(bmp_api_config_t const* const conf) { bmp_conf = *conf; return 0;  } //1 - force safe mode
+int32_t app_init(bmp_api_config_t const* const conf) { bmp_conf = *conf; return 0;  } //return 1 - force safe mode
 void app_reset(uint32_t param) {};
 void enter_sleep_mode(void){};
 void main_task_start(void (*main_task)(void*), uint8_t interval_ms) {};
-
-//void process_task(void) {};
-void process_task(void) { }
 
 bmp_error_t push_keystate_change(bmp_api_key_event_t const* const key) { return 0; }
 uint32_t pop_keystate_change(bmp_api_key_event_t* key, uint32_t len, uint8_t burst_threshold) { return 0; };
@@ -41,11 +38,15 @@ uint16_t get_vcc_percent(void) { return 100; };
 bmp_error_t set_state_change_cb(bmp_api_state_change_cb_t state) { return bmp_err; };
 
 // usb
-//void usb_init(bmp_api_config_t const* const config, uint32_t disable_msc) {};
-//void usb_enable(void) {};
-void usb_init(bmp_api_config_t const* const config, uint32_t disable_msc) { usbd_init();};
+#if 0
+void usb_init(bmp_api_config_t const* const config, uint32_t disable_msc) {};
+void usb_enable(void) {};
+void usb_process(void) {};
+#else
+void usb_init(bmp_api_config_t const* const config, uint32_t disable_msc) { usbd_init(); };
 void usb_enable(void) { usbd_enable(); };
 void usb_process(void) { usbd_process(); };
+#endif
 
 void usb_send_key(bmp_api_key_report_t* rep) {};
 void usb_send_mouse(bmp_api_mouse_report_t* rep) {};
@@ -63,12 +64,19 @@ char usb_serial_getc(void) { return cdc_acm_getc(); };
 void usb_serial_puts(uint8_t const* s, uint8_t len) {  while (*s) cdc_acm_putc(*s++); };
 int  usb_serial_byte_to_read(void) { return cdc_acm_byte_to_read(); };
 #endif
-
-
 void usb_set_raw_receive_cb(void (*raw_receive_cb)(const uint8_t *data, uint8_t length)) {};
 int  usb_raw_send(const uint8_t *data, uint8_t length) { return 0; };
 bmp_error_t usb_create_file(const char* sfn, const uint8_t* dat, uint32_t size) { return bmp_err; };
 bmp_error_t usb_set_msc_write_cb(bmp_api_msc_write_cb_t cb) { return bmp_err; };
+
+
+
+//void process_task(void) {};
+void process_task(void) {
+    blink(1,25); 
+    usb_serial_putc('6');
+}
+
 
 // ble
 void ble_init(bmp_api_config_t const* const conf) {};

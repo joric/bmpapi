@@ -7,6 +7,13 @@
 #define GPIO(port, pin) ((port << 6) | pin)
 #define LED_PIN GPIO(1,10)
 
+void blink(int times, int delay) {
+  nrf_gpio_cfg_output(LED_PIN);
+  for (int i=0; i<times*2; i++) { nrf_gpio_pin_write(LED_PIN, i%2==0); nrf_delay_ms(delay); }
+}
+
+bmp_api_config_t bmp_conf;
+
 int main(void) {
 
   // set LDO to 3.3V (nRFMicro 1.2)
@@ -16,18 +23,16 @@ int main(void) {
     NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
   }
 
-  // 5 short flash to indicate launcher started
-  nrf_gpio_cfg_output(LED_PIN);
-  for (int i=0; i<10; i++) { nrf_gpio_pin_write(LED_PIN, i%2==0); nrf_delay_ms(50); }
+  blink(2,200);
 
-  BMPAPI->bootloader_jump(); // works!
-  BMPAPI->logger.init(); // works!
+  BMPAPI->logger.init();
+  BMPAPI->logger.info("logger init");
+  BMPAPI->usb.init(&bmp_conf, 0);
+  BMPAPI->usb.enable();
 
-  nrf_delay_ms(500);
-
-  // 5 short flash to indicate launcher finished
-  nrf_gpio_cfg_output(LED_PIN);
-  for (int i=0; i<10; i++) { nrf_gpio_pin_write(LED_PIN, i%2==0); nrf_delay_ms(50); }
-
+  for (;;) {
+    BMPAPI->app.process_task();
+    BMPAPI->usb.process();
+  }
 }
 

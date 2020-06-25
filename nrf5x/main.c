@@ -1,12 +1,10 @@
 #include "apidef.h"
 
-#include "custom_board.h"
+//#include "custom_board.h"
 #include "ws2812.h"
 #include "usbd.h"
 #include "ble_common.h"
 #include "i2c.h"
-
-void blink(int times, int delay);
 
 #include "bmpapi.h"
 
@@ -37,10 +35,30 @@ void my_logger_info(const char* str) {
 void my_logger_init(void) {
   blink(2,200); // two blinks at start
   // call real logger init
-  logger_init(); //crashes here apparently
+  logger_init();
 }
 
+
+bmp_api_config_t bmp_conf;
+
 int main(void) {
-  //BMPAPI->logger.init();
+
+  // set LDO to 3.3V (nRFMicro 1.2)
+  if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3) {
+    NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+    NRF_UICR->REGOUT0 = UICR_REGOUT0_VOUT_3V3;
+    NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+  }
+
+  BMPAPI->logger.init();
+  BMPAPI->logger.info("logger init");
+  BMPAPI->usb.init(&bmp_conf, 0);
+  BMPAPI->usb.enable();
+
+  for (;;) {
+    BMPAPI->app.process_task();
+    BMPAPI->usb.process();
+  }
 }
+
 
