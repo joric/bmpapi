@@ -1,8 +1,7 @@
 PROJECT_NAME     := launcher
 TARGETS          := nrf52840_xxaa
-OUTPUT_DIRECTORY := _build
+OUTPUT_DIRECTORY := .build
 
-SDK_ROOT := $(NRFSDK15_ROOT)
 PROJ_DIR := ./
 
 $(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
