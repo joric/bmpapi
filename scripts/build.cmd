@@ -4,16 +4,22 @@
 :: get project folder
 cd %1 && for %%I in (.) do set PROJ_NAME=%%~nxI
 
+::wsl --set-default Ubuntu
 ::set SDK_ROOT=/c/mnt/SDK/nRF5_SDK_15.0.0_a53641a
-::set PROJ_DIR=%~dp0/../
+::set PROJ_ROOT=../
+
+wsl --set-default Ubuntu-20.04
 set SDK_ROOT=~/nRF5_SDK_15.0.0_a53641a
 set PROJ_ROOT=~/bmpapi
 
 set PROJ_DIR=%PROJ_ROOT%/%PROJ_NAME%
 set BUILD_DIR=.build
-set UF2=%BUILD_DIR%/%PROJ_NAME%.uf2
+set UF2=%BUILD_DIR%\%PROJ_NAME%.uf2
 
+set startTime=%time%
 bash -c "cd %PROJ_DIR% && export SDK_ROOT=%SDK_ROOT% && make" || exit
+echo Start Time: %startTime%
+echo Finish Time: %time%
 
 python %~dp0/uf2conv.py %BUILD_DIR%/nrf52840_xxaa.hex -c -f 0xADA52840 -o %UF2% || exit
 
