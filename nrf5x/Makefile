@@ -7,6 +7,10 @@ PROJ_DIR := ./
 $(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
   LINKER_SCRIPT  := bmpapi.ld
 
+ifeq ("$(SDK_ROOT)","")
+  SDK_ROOT := $(HOME)/nRF5_SDK_15.0.0_a53641a
+endif
+
 # Source files common to all targets
 SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52840.S \
